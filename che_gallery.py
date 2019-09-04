@@ -7,7 +7,7 @@ from plugin import Plugin, PluginHandler
 class ChePlugin(Plugin):
     """
     A simple che image gallery plugin
-    Usage: Place {{GALERIE}} shortcode in your [page] file, i.e. in your page's markdown code
+    Usage: Place {{GALLERY}} shortcode in your [page] file, i.e. in your page's markdown code
     """
     def install(self):
         PluginHandler.install_template_path('plugins/che_gallery')
