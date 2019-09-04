@@ -17,7 +17,7 @@ class ChePlugin(Plugin):
         self.find_rule = re.compile('{{GALLERY}}')
 
     def before_load(self, raw_content):
-        pass
+        return deepcopy(raw_content)
 
     def after_load(self, loaded_contents):
         """
@@ -28,8 +28,8 @@ class ChePlugin(Plugin):
         # Render page
         html_in = render_template('che_gallery_template.html')
 
-        if loaded_contents['type'] == 'md':
-            matches = self.find_rule.findall(loaded_contents['loaded'])
+        if 'page' in loaded_contents:
+            matches = self.find_rule.findall(loaded_contents['page']['loaded'])
             if len(matches):
-                modified_contents['loaded'] = re.sub(self.find_rule, html_in, modified_contents['loaded'])
+                modified_contents['page']['loaded'] = re.sub(self.find_rule, html_in, modified_contents['page']['loaded'])
         return modified_contents
